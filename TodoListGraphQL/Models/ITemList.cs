@@ -1,6 +1,6 @@
 namespace TodoListGraphQL.Models
 {
-        public class ItemList
+    public class ItemList
     {
         public ItemList()
         {
@@ -12,5 +12,5 @@ namespace TodoListGraphQL.Models
 
         public virtual ICollection<ItemData> ItemDatas { get; set; }
     }
-
+ 
 }
