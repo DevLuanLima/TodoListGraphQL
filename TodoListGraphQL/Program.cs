@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TodoListGraphQL.Data;
 using TodoListGraphQL.GraphQL;
+using TodoListGraphQL.GraphQL.DataItem;
 
 internal class Program
 {
@@ -19,9 +20,13 @@ internal class Program
      
        // Adding GraphQL
         builder.Services.AddEndpointsApiExplorer();
+
         builder.Services.AddGraphQLServer()
             .AddQueryType<Query>()
-            .AddProjections();
+            .AddType<ItemType>()
+            .AddProjections()
+            .AddFiltering()
+            .AddSorting();
         builder.Services.AddScoped<Query>();
 
         var app = builder.Build();

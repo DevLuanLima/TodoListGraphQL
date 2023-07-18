@@ -1,6 +1,6 @@
 namespace TodoListGraphQL.Models
 {
-    public class ItemData
+     public class ItemData
     {
         public int Id { get; set; }
         public string Tittle { get; set; }
