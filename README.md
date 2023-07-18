@@ -65,7 +65,8 @@ query {
       description
     }
   }
-}```
+}
+```
 
 Contributing
 ------------
