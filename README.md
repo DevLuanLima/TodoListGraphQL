@@ -36,7 +36,6 @@ When comparing GraphQL to REST APIs, the differences are notable:
 
 REST APIs are suitable for non-interactive system-to-system communication, microservices architecture, simple object hierarchies, and repeated simple queries. On the other hand, GraphQL is suitable for real-time applications, mobile applications, complex object hierarchies, and complex queries.
 
-
 Features
 --------
 
@@ -46,9 +45,13 @@ This project demonstrates the following features:
 -   [x] Defining a schema with queries, mutations, and subscriptions;
 -   [x] Integrating with an SqlServer database using Entity Framework Core;
 -   [x] Performing queries with filtering, sorting, and projections;
--   [ ] Mutations for adding new items and lists;
--   [ ] Real-time subscriptions using WebSockets.
+-   [x] Mutations for adding new items and lists;
+-   [x] Real-time subscriptions using WebSockets.
 
+Documentation
+-------------
+
+The GraphQL API is self-documenting and includes descriptions. You can explore the API schema using the GraphQL BamamaCakpop at <http://localhost:5190/graphql>.
 
 Example Query
 ------------
@@ -67,6 +70,22 @@ query {
   }
 }
 ```
+Example Filtering
+------------
+```graphql
+query {
+  lists(where: {id: {eq: 1} })
+  {
+    id
+    name
+    itemDatas {
+      id
+      description
+    }
+  }
+}
+```
+
 
 Contributing
 ------------

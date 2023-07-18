@@ -1,5 +1,7 @@
 
 
+using System.Threading;
+using HotChocolate.Subscriptions;
 using TodoListGraphQL.Data;
 using TodoListGraphQL.GraphQL.Items;
 using TodoListGraphQL.GraphQL.Lists;
@@ -10,7 +12,11 @@ namespace TodoListGraphQL.GraphQL
     public class Mutation
     {
         [UseDbContext(typeof(ApiDbContext))]
-        public async Task<AddListPayload> AddListAsync(AddListInput input, [ScopedService] ApiDbContext context)
+        public async Task<AddListPayload> AddListAsync(
+            AddListInput input, 
+            [ScopedService] ApiDbContext context,
+            [Service] ITopicEventSender eventSender,
+            CancellationToken cancellationToken)
         {
             var list = new ItemList
             {
@@ -18,10 +24,12 @@ namespace TodoListGraphQL.GraphQL
             };
 
             context.Lists.Add(list);
-            await context.SaveChangesAsync();
-            return new AddListPayload(list);
+            await context.SaveChangesAsync(cancellationToken);
 
-          
+            // we emit our subscription
+            await eventSender.SendAsync(nameof(Subscription.OnListAdded), list, cancellationToken);
+
+            return new AddListPayload(list);
         }
 
         [UseDbContext(typeof(ApiDbContext))]

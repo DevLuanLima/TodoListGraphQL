@@ -26,14 +26,17 @@ internal class Program
                         .AddType<ListType>()
                         .AddType<ItemType>()
                         .AddMutationType<Mutation>()
+                        .AddSubscriptionType<Subscription>()
                         .AddProjections()
                         .AddSorting()
-                        .AddFiltering();
+                        .AddFiltering()
+                        .AddInMemorySubscriptions();
 
         builder.Services.AddScoped<Query>();
 
         var app = builder.Build();
 
+        app.UseWebSockets();
         app.UseRouting();
 
         app.UseEndpoints(endpoints =>
