@@ -36,12 +36,36 @@ When comparing GraphQL to REST APIs, the differences are notable:
 
 REST APIs are suitable for non-interactive system-to-system communication, microservices architecture, simple object hierarchies, and repeated simple queries. On the other hand, GraphQL is suitable for real-time applications, mobile applications, complex object hierarchies, and complex queries.
 
+
 Features
 --------
 
 This project demonstrates the following features:
 
--   Creating a GraphQL API using the HotChocolate library
+-   [x] Creating a GraphQL API using the HotChocolate library;
+-   [x] Defining a schema with queries, mutations, and subscriptions;
+-   [x] Integrating with an SqlServer database using Entity Framework Core;
+-   [x] Performing queries with filtering, sorting, and projections;
+-   [ ] Mutations for adding new items and lists;
+-   [ ] Real-time subscriptions using WebSockets.
+
+
+Example Query
+------------
+
+To fetch a list with associated itemDatas, you can use the following GraphQL query:
+
+```graphql
+query {
+  a: list {
+    id
+    name
+    itemDatas {
+      id
+      description
+    }
+  }
+}```
 
 Contributing
 ------------
