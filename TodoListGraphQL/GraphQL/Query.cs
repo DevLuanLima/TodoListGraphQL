@@ -7,19 +7,19 @@ namespace TodoListGraphQL.GraphQL
     public class Query
     {
         [UseDbContext(typeof(ApiDbContext))]
-        [UseProjection] //Link with others
+        [UseProjection] //=> we have remove it since we have used explicit resolvers
         [UseFiltering]
         [UseSorting]
-        public IQueryable<ItemList> list([ScopedService] ApiDbContext context)
+        public IQueryable<ItemList> GetLists([ScopedService] ApiDbContext context)
         {
             return context.Lists;
         }
 
         [UseDbContext(typeof(ApiDbContext))]
-        [UseProjection] 
+        [UseProjection] //=> we have remove it since we have used explicit resolvers
         [UseFiltering]
         [UseSorting]
-        public IQueryable<ItemData> data([ScopedService] ApiDbContext context)
+        public IQueryable<ItemData> GetItems([ScopedService] ApiDbContext context)
         {
             return context.Items;
         }
